@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{})}">
+
+<head>
+
+    <title th:text="${loggedInUser.name} + ' | MunzMade'">MunzMade</title>
+</head>
+
+<body>
+
+
+    <div id="content">
+        
+
+        <!-- SIDEBAR FOR LOGGED IN USER -->
+
+        <aside th:if="${loggedInUser}">
+
+            <aside th:replace="~{/user/sidebar :: sidebar}"></aside>
+
+        </aside>
+
+
+        <!-- <div class="sm:pl-64 pt-20" style="height: 1000px;">
+    
+    
+            <div class="flex flex-col justify-center items-center">
+
+                <h1>Welcome,</h1>
+
+                <p class="text-5xl" th:text="${loggedInUser.name}"></p>
+
+                <br>
+                
+                <p>Profile Page</p>
+
+            </div>
+    
+    
+        </div> -->
+
+	<div class="sm:pl-64 pt-20" style="height: 1000px">
+		<div class="flex items-center justify-center md:pt-32 flex-col">
+		  <!--  profie card -->
+		  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl w-full">
+		    <div class="flex flex-col items-center">
+			<img data-th-src="${loggedInUser.profilePic}" alt="Profile Photo" onerror="this.src='/images/user.png'" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4">
+				<!-- <img src="https://lh3.googleusercontent.com/a/ACg8ocJgU7YXlTiF9rktDtUXlxUwr3YMMRmh94veTC8icjjUcHfvzY0=s96-c" alt="Profile Photo" onerror="this.src='/images/user.png'" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4"> -->
+			<h2 class="text-2xl font-semibold mb-2" data-th-text=${loggedInUser.name}>User Name</h2>
+			<p class="text-gray-600 mb-2 dark:text-gray-300" data-th-text="${loggedInUser.email}">user.email@example.com</p>
+			<p class="text-gray-600 mb-2 dark:text-gray-300" data-th-text="${loggedInUser.phoneNumber}">123-456-7890</p>
+			
+			<!-- <div class="w-full flex justify-between">
+			    <p class="text-sm text-gray-500">Email Verified: <span class="font-medium text-gray-700" id="email-verified" data-th-text="${loggedInUser.emailVerified ? 'YES':'NO'}">No</span></p>
+			    <p class="text-sm text-gray-500">Phone Verified: <span class="font-medium text-gray-700" id="phone-verified" data-th-text="${loggedInUser.phoneVerified ? 'YES':'NO'}">No</span></p>
+			</div> -->
+		    </div>
+		</div>
+	      </div>
+
+    </div>
+
+    
+
+
+</body>
+</html>

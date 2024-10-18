@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{})}">
+	
+<head>
+	
+	<title>MunzMade</title>
+</head>
+
+<body>
+	
+	<section id="content" class="text-center mt-16 md:w-1/2 mx-auto">
+		
+
+		<div class="text-5xl text-center text-red-800" data-th-replace="~{message :: messageBox}"></div>
+
+		<a href="/login" class="mt-8 bg-gray-900 text-white dark:bg-blue-800 px-3 py-1.5 rounded-lg">Go to Login Page</a>
+		
+		
+
+
+
+
+
+        <!-- SIDEBAR FOR LOGGED IN USER -->
+
+        <aside th:if="${loggedInUser}">
+
+            <aside th:replace="~{/user/sidebar :: sidebar}"></aside>
+
+        </aside>
+
+    </section>
+
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{})}">
+
+<head>
+
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div id="content" >
+
+            <div class="mt-16 grid grid-cols-12">
+
+                <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+
+
+                <div class="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-4">
+
+
+                <div
+                    class="block p-6 border-t-[6px] border-base-pink-200 rounded-lg shadow hover:bg-base-yellow-100 dark:bg-gray-800 dark:border-t-4 dark:border-base-pink-200 dark:hover:bg-gray-900">
+
+
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome Back</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Verify yourself</p>
+
+
+                    <!-- USER REGISTRATION FORM -->
+
+
+                    <div class="mt-4 text-red-600" th:if="${param.error}">
+
+                      Invalid username and password.</div>
+
+		      <!-- <div class="mt-4 text-red-600" th:if="${param.error}">
+			<span th:if="${param.error == 'Incorrect password'}">Incorrect password. Please try again.</span>
+			<span th:if="${param.error == 'User not found'}">User not found. Please check your email.</span>
+			<span th:if="${param.error != 'Incorrect password' and param.error != 'User not found'}">Invalid username and password.</span>
+		    </div> -->
+		    
+
+                    <div class="mt-4 text-green-500" th:if="${param.logout}">
+
+                      You have been logged out.</div>
+
+
+                    <form
+
+                        method="post" 
+
+                        data-th-action="@{'/authenticate'}"
+
+                        class="mt-7"
+                    
+                    >
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+
+                    <div data-th-replace="~{message :: messageBox}"></div>
+
+
+                          <!-- username input -->
+
+                          <div class="mt-4 mb-0">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Address</label>
+
+
+                            <input name="email" type="email" id="email" 
+                                                        
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@domain.com" required />
+                          </div>
+
+
+                          <!-- <p 
+
+                          data-th-if="${#fields.hasErrors('email')}"
+
+                          data-th-errors="*{email}"
+
+                          class="text-red-500 py-0.5 px-0.5 text-sm">Email is required!</p> -->
+
+
+                          <!-- password input -->
+
+                          <div class="mt-4 mb-0">
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+
+
+                            <input type="password" id="password" name="password"
+                                                        
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                          </div>
+
+                          <!-- <p 
+
+                          data-th-if="${#fields.hasErrors('password')}"
+
+                          data-th-errors="*{password}"
+
+                          class="text-red-500 py-0.5 px-0.5 text-sm">Password is required!</p> -->
+
+                          <div class="mt-10 mb-3 flex justify-center">
+
+
+                            <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
+
+                          </div>
+
+                    </form>
+
+
+                    <div class="line_break">
+
+
+                       <!-- OR Line Break -->
+
+                          <div class="flex items-center justify-center my-4">
+                            <hr class="w-full border-gray-300 dark:border-gray-600">
+                            <span class="px-2 text-gray-500 dark:text-gray-400">or</span>
+                            <hr class="w-full border-gray-300 dark:border-gray-600">
+                          </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="social_containers flex justify-center items-center">
+
+                      <button class="flex items-center justify-center px-4 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-full shadow-sm hover:shadow-lg transition-shadow duration-200 sm:w-full ">
+
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" class="w-5 h-5 mr-3"> -->
+
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo" class="w-5 h-5 mr-3">
+
+
+                      <a 
+                      
+                      class="text-gray-800 dark:text-gray-100 font-medium"
+                      
+                      th:href="@{'/oauth2/authorization/google'}">Continue with Google</a>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+
+
+            <div class="col-span-1 md:col-span-3 lg:col-span-4"></div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

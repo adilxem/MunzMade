@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+
+    <title>Update Customer</title>
+</head>
+
+<body>
+
+
+    <div id="content" class="-z-10">
+        
+
+        <!-- SIDEBAR FOR LOGGED IN USER -->
+
+        <aside th:if="${loggedInUser}">
+
+            <aside th:replace="~{/user/sidebar :: sidebar}"></aside>
+
+        </aside>
+
+
+        <div class="sm:pl-64 pt-12">
+    
+    
+            <div class="grid grid-cols-12">
+
+                <div class="col-span-3"></div>
+
+                <div class="col-span-12 md:col-span-6">
+
+                    <div class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+
+                        <h1 class="text-2xl font-semibold">Update Customer</h1>
+
+                        <!-- <p class="text-gray-500 dark:text-gray-400">Add a new Customer to store on the cloud with MunzMade...</p> -->
+
+
+                        <!-- FORM -->
+
+                        <form 
+                        
+                        data-th-action="@{'/user/customers/update/' + ${customerId}}"
+
+                        method="post" enctype="multipart/form-data"
+
+                        th:object="${customerForm}"
+
+                        
+                        class="mt-8"
+
+                        >
+
+                        <div 
+                        
+                        th:replace="~{message :: messageBox}"
+                        
+                        class=""></div>
+
+
+                        <!-- Customer NAME -->
+
+                            <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Name</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-user h-4 w-4"></i>
+                                    </div>
+                                    <input 
+                                    
+                                    th:field="*{name}"
+
+                                    type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Customer Name">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('name')}"
+
+                                data-th-errors="*{name}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Name is required!</p>
+    
+                            </div>
+
+                            <!-- Customer EMAIL -->
+
+                            <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Email</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-envelope h-4 w-4"></i>
+                                    </div>
+                                    <input 
+                                    
+                                    th:field="*{email}"
+
+                                    type="email"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="example@domain.com">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('email')}"
+
+                                data-th-errors="*{email}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Email is required!</p>
+    
+                            </div>
+
+
+                            <!-- PHONE NUMBER -->
+
+                            <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Phone</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-phone h-4 w-4"></i>
+                                    </div>
+                                    <input th:field="*{phoneNumber}" type="tel"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="9999999999">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('phoneNumber')}"
+
+                                data-th-errors="*{phoneNumber}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Email is required!</p>
+    
+                            </div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="mb-3">
+
+                                
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Address</label>
+                                <textarea th:field="*{address}" rows="3"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+placeholder="Flat No.
+Street, Landmark
+City, Country"></textarea>
+
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('address')}"
+
+                                data-th-errors="*{address}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Email is required!</p>
+
+
+                            </div>
+
+
+			    <!-- PINCODE -->
+
+			    <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PinCode</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-location-arrow"></i>
+                                    </div>
+                                    <input th:field="*{pincode}" type="tel"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="999999">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('pincode')}"
+
+                                data-th-errors="*{pincode}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Pincode is required!</p>
+    
+                            </div>
+
+			    <!-- Product Details -->
+
+			    <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Details</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+					<i class="fa-solid fa-bag-shopping"></i>
+                                    </div>
+                                    <input th:field="*{productDetails}" type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Scarfs">
+                                </div>
+
+
+				<p 
+
+                                data-th-if="${#fields.hasErrors('productDetails')}"
+
+                                data-th-errors="*{productDetails}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">productDetails is required!</p>
+    
+                            </div>
+
+
+			    <!-- QUANTITY -->
+
+			    <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-cart-plus h-4 w-4"></i>
+                                    </div>
+                                    <input th:field="*{quantity}" type="tel"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="3">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('quantity')}"
+
+                                data-th-errors="*{quantity}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Quantity required!</p>
+    
+                            </div>
+
+			    <!-- AMOUNT -->
+
+			    <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                                    </div>
+                                    <input th:field="*{amount}" type="tel"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="999">
+                                </div>
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('amount')}"
+
+                                data-th-errors="*{amount}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm">Amount required!</p>
+    
+                            </div>
+
+
+			    <!-- DELIVERY MODE -->
+
+                            <div class="mb-3">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Delivery Mode</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-box h-4 w-4"></i>
+                                    </div>
+                                    <select id="deliveryMode" name="deliveryMode"
+				    th:field="*{deliveryMode}"
+				    class="-z-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Select Delivery Mode"
+					onchange="toggleFields()">   
+
+				    	<option value="courier">Courier</option>
+				    	<option value="self">Self</option>
+					
+				      </select>
+                                </div>
+
+                            </div>
+
+
+
+			    <!-- COURIER COMPANY -->
+
+                            <div class="mb-3" id="courierCompanyDiv">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Courier Company</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-truck-fast h-4 w-4"></i>
+                                    </div>
+                                    <input 
+                                    
+                                    th:field="*{courierCompany}"
+
+                                    type="text"
+                                        class="-z-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Indian Post">
+                                </div>
+
+                            </div>
+
+			    
+			    <!-- TRACKING ID -->
+
+                            <div class="mb-3" id="trackingIdDiv">
+
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tracking ID</label>
+                                <div class="relative mb-1">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-regular fa-address-card"></i>
+                                    </div>
+                                    <input 
+                                    
+                                    th:field="*{trackingId}"
+
+                                    type="text"
+                                        class="-z-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="AXB76R2371">
+                                </div>
+
+    
+                            </div>
+
+
+
+
+                            <!-- Customer UPLOAD IMAGE -->
+
+
+                            <div class="mb-3">
+
+                                
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Customer's Package Image</label>
+
+                                <input 
+
+                                id="image_file_input"
+                                
+                                th:field="*{customerImage}"
+
+                                class="block w-full mb-0 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
+
+
+                                <p 
+
+                                data-th-if="${#fields.hasErrors('customerImage')}"
+
+                                data-th-errors="*{customerImage}"
+
+                                class="text-red-500 py-0.5 px-0.5 text-sm"></p>
+
+
+                                <img data-th-src="*{picture}" 
+                                
+                                id="upload_image_preview"
+
+                                class="max-h-52 mx-auto rounded-lg shadow m-3 mt-3"
+
+                                >
+
+
+                            </div>
+
+
+                            <!-- SUBMIT -->
+
+                            <div class="flex justify-center items-center">
+
+
+                                <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+
+
+
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+    
+    
+        </div>
+
+        
+    </div>  
+
+
+    <script th:src="@{'/js/admin.js'}"></script>
+    <script th:src="@{'/js/togglefields.js'}"></script>
+
+
+</body>
+</html>
