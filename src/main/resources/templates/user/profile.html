@@ -3,6 +3,9 @@
 
 <head>
 
+	<meta http-equiv="Content-Security-Policy" content="img-src 'self' https://lh3.googleusercontent.com;">
+
+
     <title th:text="${loggedInUser.name} + ' | MunzMade'">MunzMade</title>
 </head>
 
@@ -44,8 +47,10 @@
 		  <!--  profie card -->
 		  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl w-full">
 		    <div class="flex flex-col items-center">
-			<img data-th-src="${loggedInUser.profilePic}" alt="Profile Photo" onerror="this.src='/images/user.png'" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4">
+			<img th:src="${loggedInUser.profilePic}" alt="Profile Photo" onerror="this.src='/images/user.png'" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4">
 				<!-- <img src="https://lh3.googleusercontent.com/a/ACg8ocJgU7YXlTiF9rktDtUXlxUwr3YMMRmh94veTC8icjjUcHfvzY0=s96-c" alt="Profile Photo" onerror="this.src='/images/user.png'" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4"> -->
+				<!-- <p th:text="${loggedInUser.profilePic}"></p> -->
+
 			<h2 class="text-2xl font-semibold mb-2" data-th-text=${loggedInUser.name}>User Name</h2>
 			<p class="text-gray-600 mb-2 dark:text-gray-300" data-th-text="${loggedInUser.email}">user.email@example.com</p>
 			<p class="text-gray-600 mb-2 dark:text-gray-300" data-th-text="${loggedInUser.phoneNumber}">123-456-7890</p>
